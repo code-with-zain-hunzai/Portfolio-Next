@@ -9,14 +9,14 @@ const Header = () => {
             <div className="container mx-auto flex justify-between items-center">
                 <Link href="/">
                     <h1 className="text-4xl font-semibold">
-                        Luke <span className="text-accent-DEAULT">.</span>
+                        Luke <span className="text-accent-DEAFULT">.</span>
                     </h1>
                 </Link>
                 {/* desktop nav  & hire me button*/}
                 <div className="hidden xl:flex items-center gap-8">
                     <Nav />
                     <Link href="/contact">
-                        <button>Hire me</button>
+                        <Button>Hire me</Button>
                     </Link>
                 </div>
 

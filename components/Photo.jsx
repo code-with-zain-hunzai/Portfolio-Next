@@ -1,6 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import Image from "next/image"
+
 const Photo = () => {
     return (
         <div className="w-full h-full relative">
@@ -30,7 +31,7 @@ const Photo = () => {
 
                 {/* circle */}
                 <motion.svg
-                    className="w-[300px] xl:w-[506px] h-[530px] xl:h-[506px]"
+                    className="w-[298px] h-[298px] xl:w-[506px] xl:h-[506px]"
                     fill="transparent"
                     viewBox="0 0 506 506"
                     xmlns="http://www.w3.org/2000/svg"

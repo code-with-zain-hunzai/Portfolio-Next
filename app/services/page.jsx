@@ -26,7 +26,7 @@ const services = [
     num: '04',
     title: 'SEO',
     description: `
-    SEO optimizes websites for search engines improving visibility traffic and rankings through keyword research content strategy and technical adjustments`,
+    SEO optimizes websites for search engines improving visibility traffic and rankings through keyword research content strategy`,
     href: ""
   },
 ]

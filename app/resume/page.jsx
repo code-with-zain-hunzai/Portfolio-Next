@@ -112,20 +112,21 @@ const Resume = () => {
             <TabsContent value="experience" className="w-full">
               <div className="felx flex-col gap-9 text-center xl:text-left">
                 <h3 className="text-4xl font-bold mb-5">{experience.title}</h3>
-                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
+                <p className="max-w-[600px] text-white/60 mx-auto mb-5 xl:mx-0">
                   {experience.description}
                 </p>
                 <ScrollArea className="">
                   <ul className="grid grid-cols-1 lg:grid-cols-2 gap-7">
                     {experience.items.map((item, index) => {
                       return (
-                        <li key={index}>
-                          <span>{item.duration}</span>
-                          <h3>{item.position}</h3>
-                          <div>
+                        <li key={index}
+                          className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1">
+                          <span className="text-accent-DEAFULT">{item.duration}</span>
+                          <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">{item.position}</h3>
+                          <div className="flex items-center gap-3">
                             {/* dot */}
-                            <span></span>
-                            <p>{item.company}</p>
+                            <span className="w-[6px] h-[6px] rounded-full bg-accent-DEAFULT"></span>
+                            <p className="text-white/60">{item.company}</p>
                           </div>
                         </li>
                       )
@@ -134,35 +135,73 @@ const Resume = () => {
                 </ScrollArea>
               </div>
             </TabsContent>
-
+            {/* eduction  */}
             <TabsContent value="education">
-              <h2>{education.title}</h2>
-              <p>{education.description}</p>
-              {/* Map through education.items to display each education */}
+              <div className="felx flex-col gap-9 text-center xl:text-left">
+                <h3 className="text-4xl font-bold mb-5">{education.title}</h3>
+                <p className="max-w-[600px] text-white/60 mx-auto mb-5 xl:mx-0">
+                  {education.description}
+                </p>
+                <ScrollArea className="">
+                  <ul className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+                    {education.items.map((item, index) => {
+                      return (
+                        <li key={index}
+                          className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1">
+                          <span className="text-accent-DEAFULT">{item.duration}</span>
+                          <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">{item.degree}</h3>
+                          <div className="flex items-center gap-3">
+                            {/* dot */}
+                            <span className="w-[6px] h-[6px] rounded-full bg-accent-DEAFULT"></span>
+                            <p className="text-white/60">{item.institution}</p>
+                          </div>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </ScrollArea>
+              </div>
             </TabsContent>
-
-            <TabsContent value="skills">
-              <h2>{skills.title}</h2>
-              <p>{skills.description}</p>
-              <ul>
-                {skills.skillList.map((skill, index) => (
-                  <li key={index}>
-                    {skill.icon} {skill.name}
-                  </li>
-                ))}
-              </ul>
+            {/* skill */}
+            <TabsContent value="skills" className="w-full h-full" >
+              <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 text-center xl:text-left">
+                  <h3 className="text-4xl font-bold mb-5">{skills.title}</h3>
+                  <p className="text-white/60 max-w-[600px] mx-auto xl:mx-0">{skills.description}</p>
+                </div>
+                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:gap-8">
+                  {skills.skillList.map((skill, index) => {
+                    return <li key={index}>
+                      <TooltipProvider delayDuration={100}>
+                        <Tooltip>
+                          <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group">
+                            <div className="text-6xl group-hover:text-accent-DEAFULT transition-all duration-300">{skill.icon}</div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <div className="capitalize">{skill.name}</div>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </li>
+                  })}
+                </ul>
+              </div>
             </TabsContent>
-
-            <TabsContent value="about">
-              <h2>{about.title}</h2>
-              <p>{about.description}</p>
-              <ul>
-                {about.info.map((item, index) => (
-                  <li key={index}>
-                    <strong>{item.fieldName}:</strong> {item.fieldValue}
-                  </li>
-                ))}
-              </ul>
+            {/* about */}
+            <TabsContent value="about" className="w-full text-center xl:text-left">
+              <div className="flex flex-col gap-8">
+                <h3 className="text-4xl font-bold">{about.title}</h3>
+                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{about.description}</p>
+                <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[620px] mx-auto xl:mx-0">
+                  {about.info.map((item, index) => {
+                    return <li key={index}
+                      className="flex items-center justify-center xl:justify-start gap-4">
+                      <span className="text-white/60">{item.fieldName}</span>
+                      <span className="text-xl">{item.fieldValue}</span>
+                    </li>
+                  })}
+                </ul>
+              </div>
             </TabsContent>
           </div>
         </Tabs>

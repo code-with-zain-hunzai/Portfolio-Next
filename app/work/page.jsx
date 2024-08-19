@@ -72,7 +72,7 @@ const Work = () => {
           <div className="w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">
             <div className='flex flex-col gap-8 h-[50%]'>
               {/* Outline number */}
-              <div className="text-8xl leading-none font-extrabold ">
+              <div className="text-8xl leading-none font-extrabold text-accent-DEAFULT text-transparent text-outline ">
                 {project.num}
               </div>
               {/* Project category */}

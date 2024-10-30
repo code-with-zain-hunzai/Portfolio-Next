@@ -6,27 +6,26 @@ import { motion } from "framer-motion"
 const services = [
   {
     num: '01',
-    title: 'Web Development',
-    description: 'Web development creates and maintains websites, focusing on user interfaces and server-side logic using various technologies.',
+    title: 'Interactive Features and Animations',
+    description: 'Interactive Features and Animations enhance user experience by adding dynamic elements using JavaScript or React, implementing animations and transitions, and managing events like clicks and form submissions.',
     href: ""
   },
   {
     num: '02',
-    title: 'UI/UX Desgin',
-    description: 'UX/UI design enhances user experiences by creating intuitive, aesthetically pleasing interfaces for digital products.',
+    title: 'UI/UX Design Implementation',
+    description: 'UI/UX Design Implementation translates design mockups into functional web pages, focusing on aesthetics and usability to create intuitive user interfaces that enhance the overall user experience.',    
     href: ""
   },
   {
     num: '03',
-    title: 'Logo Design',
-    description: 'Logo design creates visual symbols representing brands, focusing on simplicity, memorability, and brand identity.',
+    title: 'Responsive Web Design and Mobile Optimization',
+    description: 'Responsive Web Design ensures websites are mobile-friendly and adapt to various screen sizes using media queries and flexible layouts, providing an optimal viewing experience across all devices.',
     href: ""
   },
   {
     num: '04',
-    title: 'SEO',
-    description: `
-    SEO optimizes websites for search engines improving visibility traffic and rankings through keyword research content strategy`,
+    title: 'Cross-Browser Compatibility',
+    description: 'Cross-Browser Compatibility ensures that websites function correctly across multiple browsers, addressing browser-specific issues and inconsistencies while utilizing feature detection and fallbacks for unsupported features.',
     href: ""
   },
 ]

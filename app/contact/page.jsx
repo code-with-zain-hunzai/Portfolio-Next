@@ -95,7 +95,7 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
               <h3 className="text-4xl text-accent-DEAFULT">Let's work together</h3>
               <p className="text-white/60">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit pariatur alias commodi doloribus est inventore voluptates.
+              Your ideas deserve to shine online. I provide tailored web development services that bring your concepts to life with sleek designs and seamless functionality. Let’s collaborate and make your digital goals a reality!
               </p>
               {/* Input Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -112,9 +112,9 @@ const Contact = () => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Services</SelectLabel>
-                    <SelectItem value="web-development">Web Development</SelectItem>
-                    <SelectItem value="ux-ui-design">UX/UI Design</SelectItem>
-                    <SelectItem value="logo-design">Logo Design</SelectItem>
+                    <SelectItem value="web-development">Responsive Web Design</SelectItem>
+                    <SelectItem value="ux-ui-design">UX/UI Implementation</SelectItem>
+                    <SelectItem value="logo-design">Cross Browser Compatibility</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>

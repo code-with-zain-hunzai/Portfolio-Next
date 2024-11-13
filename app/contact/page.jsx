@@ -38,25 +38,44 @@ const Contact = () => {
     message: "",
     service: ""
   });
-  const [submitting, setSubmitting] = useState(false); // State to track form submission
+
+  // **New: State for errors**
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+  const validateForm = () => {
+    const newErrors = {};
     const { firstname, lastname, email, phone, message, service } = formData;
 
-    // Basic validation to check if any field is empty
-    if (!firstname || !lastname || !email || !phone || !message || !service) {
-      toast.error("Please fill out all fields!");
+    // **New: Individual field validation**
+    if (!firstname) newErrors.firstname = "First name is required";
+    if (!lastname) newErrors.lastname = "Last name is required";
+    if (!email) newErrors.email = "Email address is required";
+    if (!phone) newErrors.phone = "Phone number is required";
+    if (!message) newErrors.message = "Message is required";
+    if (!service) newErrors.service = "Please select a service";
+
+    setErrors(newErrors);
+
+    // **New: Return whether form is valid**
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // **New: Validate form**
+    if (!validateForm()) {
+      toast.error("Please fill out all required fields.");
       return;
     }
 
-    setSubmitting(true); // Disable the button
+    setSubmitting(true);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -67,18 +86,18 @@ const Contact = () => {
         },
         body: JSON.stringify({
           access_key: "3e55aee4-5c14-4cb8-b945-dfa81252a6e0",
-          name: `${firstname} ${lastname}`,
-          email: email,
-          message: message,
-          phone: phone,
-          service: service
+          name: `${formData.firstname} ${formData.lastname}`,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message
         }),
       });
 
       const result = await response.json();
       if (result.success) {
         toast.success("Message sent successfully!");
-        e.target.reset(); // Reset the form after successful submission
+        e.target.reset();
         setFormData({
           firstname: "",
           lastname: "",
@@ -93,7 +112,7 @@ const Contact = () => {
     } catch (error) {
       toast.error("Error: Message not sent.");
     } finally {
-      setSubmitting(false); // Re-enable the button after submission is complete
+      setSubmitting(false);
     }
   };
 
@@ -118,57 +137,85 @@ const Contact = () => {
               </p>
               {/* Input Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input
-                  name="firstname"
-                  type="text"
-                  placeholder="First Name"
-                  value={formData.firstname}
-                  onChange={handleInputChange}
-                />
-                <Input
-                  name="lastname"
-                  type="text"
-                  placeholder="Last Name"
-                  value={formData.lastname}
-                  onChange={handleInputChange}
-                />
-                <Input
-                  name="email"
-                  type="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
-                <Input
-                  name="phone"
-                  type="tel"
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                />
+                <div>
+                  <Input
+                    className="w-full"
+                    name="firstname"
+                    type="text"
+                    placeholder="First Name"
+                    value={formData.firstname}
+                    onChange={handleInputChange}
+                  />
+                  {/* **New: Error message** */}
+                  {errors.firstname && <p className="text-red-500 text-sm">{errors.firstname}</p>}
+                </div>
+                <div>
+                  <Input
+                    className="w-full"
+                    name="lastname"
+                    type="text"
+                    placeholder="Last Name"
+                    value={formData.lastname}
+                    onChange={handleInputChange}
+                  />
+                  {/* **New: Error message** */}
+                  {errors.lastname && <p className="text-red-500 text-sm">{errors.lastname}</p>}
+                </div>
+                <div>
+                  <Input
+                    className="w-full"
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
+                  {/* **New: Error message** */}
+                  {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                </div>
+                <div>
+                  <Input
+                    className="w-full"
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                  />
+                  {/* **New: Error message** */}
+                  {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+                </div>
               </div>
               {/* Select Service */}
-              <Select  name="service" value={formData.service} onValueChange={(value) => setFormData({ ...formData, service: value })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a service" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Services</SelectLabel>
-                    <SelectItem value="Front-end-development">Front End Development</SelectItem>
-                    <SelectItem value="ux-ui-design">UX/UI Implementation</SelectItem>
-                    <SelectItem value="Full-stack-Development">Full Stack Development</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <div>
+                <Select className="w-full" name="service" value={formData.service} onValueChange={(value) => setFormData({ ...formData, service: value })}>
+                  <SelectTrigger className='w-full gap-2'>
+                    <SelectValue placeholder="Select a service" className="pb-4" />
+                  </SelectTrigger>
+                  <SelectContent className="w-full">
+                    <SelectGroup>
+                      <SelectLabel>Services</SelectLabel>
+                      <SelectItem value="Front-end-development">Front End Development</SelectItem>
+                      <SelectItem value="ux-ui-design">UX/UI Implementation</SelectItem>
+                      <SelectItem value="Full-stack-Development">Full Stack Development</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                {/* **New: Error message** */}
+                {errors.service && <p className="text-red-500 text-sm">{errors.service}</p>}
+              </div>
               {/* Message Textarea */}
-              <Textarea
-                name="message"
-                placeholder="Type Your Message Here"
-                className="h-[200px]"
-                value={formData.message}
-                onChange={handleInputChange}
-              />
+              <div>
+                <Textarea
+                  name="message"
+                  placeholder="Type Your Message Here"
+                  className="h-[200px]"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                />
+                {/* **New: Error message** */}
+                {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
+              </div>
               {/* Submit Button */}
               <Button
                 type="submit"

@@ -29,45 +29,6 @@ const info = [
   },
 ];
 
-async function handleSubmit(e) {
-    e.preventDefault();
-    
-    const firstname = e.target.firstname.value.trim();
-    const lastname = e.target.lastname.value.trim();
-    const email = e.target.email.value.trim();
-    const phone = e.target.phone.value.trim();
-    const message = e.target.message.value.trim();
-    const service = e.target.service.value;
-
-    if (!firstname || !lastname || !email || !phone || !message || !service) {
-        toast.error("Please fill out all fields!");
-        return;
-    }
-
-    const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-        },
-        body: JSON.stringify({
-            access_key: "3e55aee4-5c14-4cb8-b945-dfa81252a6e0",
-            name: `${firstname} ${lastname}`,
-            email: email,
-            message: message,
-            phone: phone, 
-            service: service
-        }),
-    });
-    const result = await response.json();
-    if (result.success) {
-        toast.success("Message sent successfully!");
-        e.target.reset();
-    } else {
-        toast.error("Error: Message not sent.");
-    }
-}
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     firstname: "",
@@ -77,6 +38,64 @@ const Contact = () => {
     message: "",
     service: ""
   });
+  const [submitting, setSubmitting] = useState(false); // State to track form submission
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const { firstname, lastname, email, phone, message, service } = formData;
+
+    // Basic validation to check if any field is empty
+    if (!firstname || !lastname || !email || !phone || !message || !service) {
+      toast.error("Please fill out all fields!");
+      return;
+    }
+
+    setSubmitting(true); // Disable the button
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "3e55aee4-5c14-4cb8-b945-dfa81252a6e0",
+          name: `${firstname} ${lastname}`,
+          email: email,
+          message: message,
+          phone: phone,
+          service: service
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        toast.success("Message sent successfully!");
+        e.target.reset(); // Reset the form after successful submission
+        setFormData({
+          firstname: "",
+          lastname: "",
+          email: "",
+          phone: "",
+          message: "",
+          service: ""
+        });
+      } else {
+        toast.error("Error: Message not sent.");
+      }
+    } catch (error) {
+      toast.error("Error: Message not sent.");
+    } finally {
+      setSubmitting(false); // Re-enable the button after submission is complete
+    }
+  };
 
   return (
     <motion.section
@@ -95,34 +114,70 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
               <h3 className="text-4xl text-accent-DEAFULT">Let's work together</h3>
               <p className="text-white/60">
-              Your ideas deserve to shine online. I provide tailored web development services that bring your concepts to life with sleek designs and seamless functionality. Let’s collaborate and make your digital goals a reality!
+                Your ideas deserve to shine online. I provide tailored web development services that bring your concepts to life with sleek designs and seamless functionality. Let’s collaborate and make your digital goals a reality!
               </p>
               {/* Input Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input name="firstname" type="text" placeholder="First Name" />
-                <Input name="lastname" type="text" placeholder="Last Name" />
-                <Input name="email" type="email" placeholder="Email Address" />
-                <Input name="phone" type="tel" placeholder="Phone Number" />
+                <Input
+                  name="firstname"
+                  type="text"
+                  placeholder="First Name"
+                  value={formData.firstname}
+                  onChange={handleInputChange}
+                />
+                <Input
+                  name="lastname"
+                  type="text"
+                  placeholder="Last Name"
+                  value={formData.lastname}
+                  onChange={handleInputChange}
+                />
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                <Input
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                />
               </div>
               {/* Select Service */}
-              <Select name="service">
+              <Select  name="service" value={formData.service} onValueChange={(value) => setFormData({ ...formData, service: value })}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Services</SelectLabel>
-                    <SelectItem value="web-development">Responsive Web Design</SelectItem>
+                    <SelectItem value="Front-end-development">Front End Development</SelectItem>
                     <SelectItem value="ux-ui-design">UX/UI Implementation</SelectItem>
-                    <SelectItem value="logo-design">Cross Browser Compatibility</SelectItem>
+                    <SelectItem value="Full-stack-Development">Full Stack Development</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
               {/* Message Textarea */}
-              <Textarea name="message" placeholder="Type Your Message Here" className="h-[200px]" />
+              <Textarea
+                name="message"
+                placeholder="Type Your Message Here"
+                className="h-[200px]"
+                value={formData.message}
+                onChange={handleInputChange}
+              />
               {/* Submit Button */}
-              <Button type="submit" className="mt-4 bg-accent-DEAFULT hover:bg-accent-hover text-white">
-                Send Message
+              <Button
+                type="submit"
+                disabled={submitting}
+                className={clsx("mt-4 bg-accent-DEAFULT hover:bg-accent-hover text-white", {
+                  "opacity-50 cursor-not-allowed": submitting
+                })}
+              >
+                {submitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </div>

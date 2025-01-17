@@ -21,9 +21,9 @@ import WorkSliderBtn from '@/components/WorkSliderBtn';
 const projects = [
   {
     num: "01",
-    category: "Frontend",
+    category: "FurniShop",
     title: "Project 1",
-    description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quasi at accusantium facere nostrum? Quisquam, consequatur nesciunt?`,
+    description: `I created a responsive portfolio website using HTML, CSS, and JavaScript to present my projects and skills. The site has smooth scrolling, a dynamic navigation bar, and form validation that enhances functionality and user experience. This project strengthened my front-end development skills and ensured compatibility across various devices.`,
     stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "JavaScript" }],
     image: '/assets/work/thumb1.png',
     live: "",
@@ -31,9 +31,9 @@ const projects = [
   },
   {
     num: "02",
-    category: "Frontend",
+    category: "Interno",
     title: "Project 2",
-    description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quasi at accusantium facere nostrum? Quisquam, consequatur nesciunt?`,
+    description: `I designed a fully responsive website using React, Tailwind CSS, and JavaScript. This website is intended to be more about my projects and skills. The site has features like smooth scrolling, dynamic navigation menu, and input validation, which have been implemented keeping performance and usability in mind. This project has gone deep into the experience with modern front-end frameworks and responsive design techniques.    `,
     stack: [{ name: "TailwindCss" }, { name: "JavaScript" }, { name: "React" }],
     image: '/assets/work/thumb2.png',
     live: "",
@@ -41,9 +41,9 @@ const projects = [
   },
   {
     num: "03",
-    category: "Frontend",
+    category: "Alina Lee",
     title: "Project 3",
-    description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quasi at accusantium facere nostrum? Quisquam, consequatur nesciunt?`,
+    description: `A very neat and nice portfolio landing page using React, Next.js, and Tailwind CSS with a striking design for a photographer's portfolio. It puts focus on the portfolio, using full smooth transitions on images and responsive layout that optimizes performance for all devices along with an engaging, seamless experience across all devices.    `,
     stack: [{ name: "TailwindCss" }, { name: "React" }, { name: "Next.js" }],
     image: '/assets/work/thumb3.png',
     live: "",

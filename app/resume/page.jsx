@@ -18,7 +18,7 @@ const about = {
   description: `
   Experienced front-end developer skilled in React, Next.js, and Tailwind CSS, focused on building intuitive, responsive, and visually appealing web interfaces.`,
   info: [
-    { fieldName: "Name", fieldValue: "Zain Coleman" },
+    { fieldName: "Name", fieldValue: "Zain ul abbdin" },
     { fieldName: "Phone", fieldValue: "(+92) 3421083883" },
     { fieldName: "Experience", fieldValue: "3+ years" },
     { fieldName: "Skype", fieldValue: "Zain.hunzai" },
@@ -32,7 +32,7 @@ const about = {
 const experience = {
   icon: "/assets/resume/badge.svg",
   title: "My Experience",
-  description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis sit molestiae possimus fugit, totam fuga, eum eius voluptates laborum eligendi obcaecati.`,
+  description: `I started my career in web development during the summer of 2021 at Uconnect, where I developed interactive websites using React, Next.js, and Tailwind CSS. Currently, I am working with Team Northnine, working on innovative projects and further developing my expertise in modern web technologies.  `,
   items: [
     {
       company: "NorthNine",
@@ -50,7 +50,7 @@ const experience = {
 const education = {
   icon: "/assets/resume/cap.svg",
   title: "My Education",
-  description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis sit molestiae possimus fugit, totam fuga, eum eius voluptates laborum eligendi obcaecati.`,
+  description: `I successfully completed my 2nd year of studies from Sedna College, taking my board exams from the FBISE board. Now, I am a part-time student of Computer Science from Virtual University of Pakistan, and I have finished my second semester in depth in this field.`,
   items: [
     {
       institution: "Meta Web Development Course",

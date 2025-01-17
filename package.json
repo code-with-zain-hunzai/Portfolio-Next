@@ -32,7 +32,8 @@
     "react-toastify": "^10.0.5",
     "swiper": "^11.1.9",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

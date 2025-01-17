@@ -192,7 +192,7 @@ const Contact = () => {
                   <SelectTrigger className='w-full gap-2'>
                     <SelectValue placeholder="Select a service" className="pb-4" />
                   </SelectTrigger>
-                  <SelectContent className="w-full">
+                  <SelectContent className="w-full h-auto text-nowrap">
                     <SelectGroup>
                       <SelectLabel>Services</SelectLabel>
                       <SelectItem value="Front-end-development">Front End Development</SelectItem>
@@ -208,6 +208,7 @@ const Contact = () => {
               <div>
                 <Textarea
                   name="message"
+                  autoCorrect="on" 
                   placeholder="Type Your Message Here"
                   className="h-[200px]"
                   value={formData.message}

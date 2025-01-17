@@ -12,7 +12,7 @@ import { FiDownload } from "react-icons/fi";
 
 const Home = () => {
   return (
-    <section className="w-full space-y-28 z-10 pt-28">
+    <section className="w-full space-y-28 z-10 pt-28 overflow-hidden">
       <div className="container mx-auto h-full">
         <HeaderSection />
       </div>

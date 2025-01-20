@@ -36,10 +36,17 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []); // No need to include Links in dependencies
+  }, []);
+
+  const handleSmoothScroll = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <nav className="fixed top-0 w-full bg-transparent backdrop-blur-md text-white py-4 shadow-md z-50 ">
+    <nav className="fixed top-0 w-full bg-transparent backdrop-blur-md text-white py-4 shadow-md z-50">
       <div className="container mx-auto flex justify-between items-center gap-8">
         <h1 className="text-2xl xl:text-4xl font-semibold">
           &lt;
@@ -48,18 +55,22 @@ const Header = () => {
         </h1>
         <div className="hidden lg:flex items-center space-x-10">
           {Links.map((link, index) => (
-            <a
+            <button
               key={index}
-              href={`#${link.path}`}
-              className={`capitalize font-medium transition-all duration-300 hover:text-[#00ff99] ${activeSection === link.path
-                ? "text-[#00ff99] border-b-2 border-[#00ff99]"
-                : "text-white"
-                }`}
+              onClick={() => handleSmoothScroll(link.path)}
+              className={`capitalize font-medium transition-all duration-300 hover:text-[#00ff99] ${
+                activeSection === link.path
+                  ? "text-[#00ff99] border-b-2 border-[#00ff99]"
+                  : "text-white"
+              }`}
             >
               {link.name}
-            </a>
+            </button>
           ))}
-          <Button className="px-6 py-3 text-sm xl:text-base hidden lg:flex">
+          <Button
+            className="px-6 py-3 text-sm xl:text-base hidden lg:flex"
+            onClick={() => handleSmoothScroll("contact")}
+          >
             Hire me
           </Button>
         </div>
@@ -75,21 +86,30 @@ const Header = () => {
       {menuOpen && (
         <div className="fixed bg-[#1c1c22] w-full backdrop-blur-md bg-opacity-80 flex flex-col items-center justify-center space-y-2 lg:hidden z-40 mt-4 py-4">
           {Links.map((link, index) => (
-            <a
+            <button
               key={index}
-              href={`#${link.path}`}
-              className={`capitalize text-xl font-medium transition-all duration-300 hover:text-[#00ff99] ${activeSection === link.path
-                ? "text-[#00ff99] border-b-2 border-[#00ff99]"
-                : "text-white"
-                }`}
               onClick={() => {
+                handleSmoothScroll(link.path);
                 setMenuOpen(false);
               }}
+              className={`capitalize text-xl font-medium transition-all duration-300 hover:text-[#00ff99] ${
+                activeSection === link.path
+                  ? "text-[#00ff99] border-b-2 border-[#00ff99]"
+                  : "text-white"
+              }`}
             >
               {link.name}
-            </a>
+            </button>
           ))}
-          <Button className="px-6 py-3 text-lg hidden lg:flex">Hire me</Button>
+          <Button
+            className="px-6 py-3 text-lg hidden lg:flex"
+            onClick={() => {
+              handleSmoothScroll("contact");
+              setMenuOpen(false);
+            }}
+          >
+            Hire me
+          </Button>
         </div>
       )}
     </nav>
